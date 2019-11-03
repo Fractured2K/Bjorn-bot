@@ -1,6 +1,6 @@
 require('dotenv').config();
 const Discord = require('discord.js');
-const parseCommand = require('./utils/parseCommand');
+const parseMessage = require('./utils/parseMessage');
 
 // Create discord client instance
 const client = new Discord.Client();
@@ -11,5 +11,5 @@ client.login(process.env.DISCORD_CLIENT_SECRET);
 // Listen for message event
 client.on('message', message => {
 	// Parse message
-	parseCommand(message);
+	parseMessage(message);
 });

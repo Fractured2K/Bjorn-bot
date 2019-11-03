@@ -1,6 +1,6 @@
-const ping = require('./ping');
+const ping = require('../commands/ping');
 
-commands = (message, command) => {
+runCommand = (message, command) => {
 	// Create commands object
 	const commands = {
 		ping: () => ping(message)
@@ -13,4 +13,4 @@ commands = (message, command) => {
 	}
 };
 
-module.exports = commands;
+module.exports = runCommand;
