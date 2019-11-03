@@ -5,8 +5,15 @@ const runCommand = require('./runCommand');
  */
 
 parseMessage = message => {
-	const command = message.content.toLowerCase().split('!');
-	return runCommand(message, command[1]);
+	if (message.content.charAt(0) === '!') {
+		const command = message.content
+			.toLowerCase()
+			.split('!')
+			.join('')
+			.split(' ');
+
+		return runCommand(message, command[0]);
+	}
 };
 
 module.exports = parseMessage;
