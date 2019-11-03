@@ -1,14 +1,14 @@
 const ping = require('../commands/ping');
 
 runCommand = (message, command) => {
-	// Create commands object
+	// available commands
 	const commands = {
 		ping: () => ping(message)
 	};
 
-	// Check if command exists
+	// check if command exists
 	if (commands[command]) {
-		// If command exists run it
+		// run command
 		return commands[command]();
 	}
 };
