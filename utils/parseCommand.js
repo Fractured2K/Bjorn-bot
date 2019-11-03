@@ -1,5 +1,8 @@
-parseCommand = command => {
-	let parsedCommand = command.split('!');
+// Commands
+const ping = require('../commands/ping');
+
+parseCommand = message => {
+	let command = message.content.split('!');
 };
 
 module.exports = parseCommand;

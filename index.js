@@ -11,6 +11,6 @@ const client = new Discord.Client();
 client.login(process.env.DISCORD_CLIENT_SECRET);
 
 // Listen for message event
-client.on('message', ({ content }) => {
-	parseCommand(content);
+client.on('message', message => {
+	parseCommand(message);
 });
