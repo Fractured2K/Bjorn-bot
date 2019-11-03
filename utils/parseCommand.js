@@ -1,8 +1,12 @@
-// Commands
-const ping = require('../commands/ping');
+const commands = require('../commands/commands');
+
+/*
+ * Parses incoming message into a command
+ */
 
 parseCommand = message => {
-	let command = message.content.split('!');
+	const command = message.content.toLowerCase().split('!');
+	return commands(message, command[1]);
 };
 
 module.exports = parseCommand;
