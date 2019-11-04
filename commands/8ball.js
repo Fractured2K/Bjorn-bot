@@ -1,3 +1,7 @@
+/*
+ * Returns random 8ball response
+ */
+
 const reponses = require('../helpers/8ballReponses');
 
 eightBall = message => {
