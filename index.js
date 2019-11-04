@@ -10,6 +10,10 @@ client.login(process.env.DISCORD_CLIENT_SECRET);
 
 // Listen for message event
 client.on('message', message => {
-	// Parse message
-	parseMessage(message);
+	try {
+		// Parse message
+		parseMessage(message);
+	} catch (error) {
+		throw new Error(error);
+	}
 });
