@@ -1,11 +1,13 @@
-const ping = require('../commands/ping');
 const eightBall = require('../commands/8ball');
+const meme = require('../commands/meme');
+const ping = require('../commands/ping');
 
 runCommand = (message, command) => {
 	// available commands
 	const commands = {
-		ping: () => ping(message),
-		'8ball': () => eightBall(message)
+		'8ball': () => eightBall(message),
+		meme: () => meme(message),
+		ping: () => ping(message)
 	};
 
 	// check if command exists
