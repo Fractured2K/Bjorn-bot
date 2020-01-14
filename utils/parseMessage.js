@@ -1,19 +1,12 @@
-const runCommand = require('./runCommand');
-
-/*
- * Parses incoming message into a command
+/*@
+ * Returns the contents of a message minus the command. i.e "!8ball Is space neat?" -> "Is space neat?"
+ * @param Object {message}
  */
-
 parseMessage = message => {
-	if (message.content.charAt(0) === '!') {
-		const command = message.content
-			.toLowerCase()
-			.split('!')
-			.join('')
-			.split(' ');
-
-		return runCommand(message, command[0]);
-	}
+  return message.content
+    .split(" ")
+    .slice(1)
+    .join(" ");
 };
 
 module.exports = parseMessage;
