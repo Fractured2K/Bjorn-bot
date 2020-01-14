@@ -1,15 +1,27 @@
-const { Attachment } = require('discord.js');
-const axios = require('axios');
+const { Attachment } = require("discord.js");
+const axios = require("axios");
+
+/*
+ * Returns random meme from meme api
+ */
 
 meme = async message => {
-	// fetch meme from api
-	const { data } = await axios.get('https://meme-api.herokuapp.com/gimme');
+  // send message confirming a meme is being sent
+  message.channel.send({
+    embed: {
+      color: 3447003,
+      title: "Scrait up stealing a meme, 1sec."
+    }
+  });
 
-	// create message message attachment
-	const attachment = new Attachment(data.url);
+  // fetch meme from api
+  const { data } = await axios.get("https://meme-api.herokuapp.com/gimme");
 
-	// return message with attached meme (image)
-	return message.channel.send(attachment);
+  // create message message attachment
+  const attachment = new Attachment(data.url);
+
+  // return message with attached meme (image)
+  return message.channel.send(attachment);
 };
 
 module.exports = meme;
