@@ -1,6 +1,7 @@
 const eightBall = require("../commands/8ball");
 const meme = require("../commands/meme");
 const ping = require("../commands/ping");
+const help = require("../commands/help");
 
 parseCommand = (message, client) => {
   if (message.content.charAt(0) === "!") {
@@ -8,7 +9,8 @@ parseCommand = (message, client) => {
     const commands = {
       "8ball": () => eightBall(message),
       meme: () => meme(message, client),
-      ping: () => ping(message)
+      ping: () => ping(message),
+      help: () => help(message)
     };
 
     const command = message.content
