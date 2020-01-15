@@ -10,21 +10,25 @@ help = message => {
       title: "Possible commands",
       description: "A list of some cool shit Bjorn can do",
       fields: [
-		{
-			name: "```!play {URL} || {TEXT}```",
-			value: "**Plays a song**",
-		},
-		{
-			name: "```!skip```",
-			value: "**Skip song currently playing**",
-		},
-		{
-			name: "```!stop```",
-			value: "**Stop song currently playing**",
-		},
+        {
+          name: "```!play {URL}```",
+          value: "**Plays a song**"
+        },
+        {
+          name: "```!skip  - COMING SOON```",
+          value: "**Skip song currently playing**"
+        },
+        {
+          name: "```!stop - COMING SOON```",
+          value: "**Stop song currently playing**"
+        },
+        {
+          name: "```!queue - COMING SOON```",
+          value: "**View current songs in queue**"
+        },
         {
           name: "```!8ball```",
-		  value: "**Ask the eight ball a question and get a response!**",
+          value: "**Ask the eight ball a question and get a response!**"
         },
         {
           name: "```!Meme```",
@@ -32,8 +36,7 @@ help = message => {
         },
         {
           name: "```!Ping```",
-          value:
-            "**Replies with pong**"
+          value: "**Replies with pong**"
         }
       ]
     }
