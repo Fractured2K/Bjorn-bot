@@ -1,16 +1,18 @@
 const eightBall = require("../commands/8ball");
+const help = require("../commands/help");
 const meme = require("../commands/meme");
 const ping = require("../commands/ping");
-const help = require("../commands/help");
+const play = require('../commands/play');
 
-parseCommand = (message, client) => {
+executeCommand = (message) => {
   if (message.content.charAt(0) === "!") {
     // available commands
     const commands = {
       "8ball": () => eightBall(message),
-      meme: () => meme(message, client),
+      meme: () => meme(message),
       ping: () => ping(message),
-      help: () => help(message)
+	  help: () => help(message),
+	  play: () => play(message)
     };
 
     const command = message.content
@@ -18,8 +20,6 @@ parseCommand = (message, client) => {
       .split("!")
       .join("")
       .split(" ");
-
-    console.log(command);
 
     // check if command exists
     if (commands[command[0]]) {
@@ -31,4 +31,4 @@ parseCommand = (message, client) => {
   }
 };
 
-module.exports = parseCommand;
+module.exports = executeCommand;
