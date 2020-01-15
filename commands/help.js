@@ -11,8 +11,16 @@ help = message => {
       description: "A list of some cool shit Bjorn can do",
       fields: [
 		{
-			name: "```!play```",
-			value: "**COMING SOON**"
+			name: "```!play {URL} || {TEXT}```",
+			value: "**Plays a song**",
+		},
+		{
+			name: "```!skip```",
+			value: "**Skip song currently playing**",
+		},
+		{
+			name: "```!stop```",
+			value: "**Stop song currently playing**",
 		},
         {
           name: "```!8ball```",
