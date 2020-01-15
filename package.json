@@ -1,30 +1,32 @@
 {
-  "name": "bjorn-the-bot",
-  "version": "1.0.0",
-  "description": "A feature rich discord bot",
-  "main": "index.js",
-  "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
-  },
-  "repository": {
-    "type": "git",
-    "url": "git+https://github.com/Fractured2K/Bjorn-the-bot.git"
-  },
-  "keywords": [
-    "discord",
-    "bot"
-  ],
-  "author": "Fractured2K",
-  "license": "MIT",
-  "bugs": {
-    "url": "https://github.com/Fractured2K/Bjorn-the-bot/issues"
-  },
-  "homepage": "https://github.com/Fractured2K/Bjorn-the-bot#readme",
-  "dependencies": {
-    "axios": "^0.19.0",
-    "discord.js": "^11.5.1",
-    "dotenv": "^8.2.0",
-    "ffmpeg-binaries": "^3.2.2-3",
-    "ytdl-core-discord": "^1.0.3"
-  }
+	"name": "bjorn-the-bot",
+	"version": "1.0.0",
+	"description": "A feature rich discord bot",
+	"main": "index.js",
+	"scripts": {
+		"test": "echo \"Error: no test specified\" && exit 1"
+	},
+	"repository": {
+		"type": "git",
+		"url": "git+https://github.com/Fractured2K/Bjorn-the-bot.git"
+	},
+	"keywords": [
+		"discord",
+		"bot"
+	],
+	"author": "Fractured2K",
+	"license": "MIT",
+	"bugs": {
+		"url": "https://github.com/Fractured2K/Bjorn-the-bot/issues"
+	},
+	"homepage": "https://github.com/Fractured2K/Bjorn-the-bot#readme",
+	"dependencies": {
+		"axios": "^0.19.0",
+		"discord.js": "^11.5.1",
+		"dotenv": "^8.2.0",
+		"ffmpeg-binaries": "^3.2.2-3",
+		"node-opus": "^0.3.3",
+		"opusscript": "0.0.7",
+		"ytdl-core-discord": "git+https://github.com/amishshah/ytdl-core-discord.git"
+	}
 }
