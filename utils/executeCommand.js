@@ -3,6 +3,8 @@ const help = require("../commands/help");
 const meme = require("../commands/meme");
 const ping = require("../commands/ping");
 const play = require("../commands/play");
+const pause = require("../commands/pause");
+const skip = require("../commands/skip");
 const stop = require("../commands/stop");
 
 executeCommand = message => {
@@ -14,6 +16,8 @@ executeCommand = message => {
       ping: () => ping(message),
       help: () => help(message),
       play: () => play(message),
+      pause: () => pause(message),
+      skip: () => skip(message),
       stop: () => stop(message)
     };
 
