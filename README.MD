@@ -4,16 +4,15 @@
 [![MIT Licence](https://badges.frapsoft.com/os/mit/mit.png?v=103)](https://opensource.org/licenses/mit-license.php) [![star this repo](https://githubbadges.com/star.svg?user=fractured2k&repo=bjorn-bot&style=default)](https://github.com/fractured2k/bjorn-bot)
 [![fork this repo](https://githubbadges.com/fork.svg?user=fractured2k&repo=bjorn-bot&style=default)](https://github.com/fractured2k/bjorn-bot/fork)
 
-#### Quick Links
-
-- [Getting Started](getting-started-👋)
-- [Commands](#commands-🖥️)
-- [Configuring a Development Environment](#dev-💻)
-- [Deploying Bjorn](#deploying-bjorn-🚀)
-
 # Getting started 👋
 
 Work in progress
+
+#### Quick Links
+
+- [Commands](#commands-🖥️)
+- [Configuring a Development Environment](#dev-💻)
+- [Deploying Bjorn](#deploying-bjorn-🚀)
 
 # Commands 🖥️
 
