@@ -10,9 +10,9 @@ Work in progress
 
 #### Quick Links
 
-- [Commands](#commands)
-- [Configuring a Development Environment](#dev)
-- [Deploying Bjorn](#deploying-bjorn)
+- [Commands](#commands-%EF%B8%8F)
+- [Configuring a Development Environment](#dev-)
+- [Deploying Bjorn](#deploying-bjorn-)
 
 # Commands 🖥️
 
@@ -43,7 +43,7 @@ _Want to host Bjorn yourself? Here's a quick walk through on deployingn with her
 
 1.  [First make sure fork the repo.](https://github.com/fractured2k/bjorn-bot/fork)
 
-2.  [Create new app on heroku](https://dashboard.heroku.com/apps)
+2.  [Create a new app on heroku](https://dashboard.heroku.com/apps)
 
     ![Create new app on heroku image](https://i.gyazo.com/2332daadc36184b14139c5df465e4f9b.png)
 
