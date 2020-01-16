@@ -5,7 +5,7 @@
 parseMessage = message => {
   return message.content
     .split(" ")
-    .slice(1)
+    .slice(process.env.COMMAND_PREFIX.length)
     .join(" ");
 };
 
