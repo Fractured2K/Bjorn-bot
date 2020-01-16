@@ -28,11 +28,34 @@ play = async message => {
     });
   }
 
-  // add song to queue
-  server.get(message.guild.id).songs.push(url);
+  const queueMessage = await message.channel.send(":arrows_counterclockwise: Preparing video")
 
+  const songInfo = await ytdl.getInfo(url);
+  const songThumbnails = songInfo.player_response.videoDetails.thumbnail.thumbnails;
+
+  const song = {
+	uploader: songInfo.author.name,
+	uploader_url:`https://www.youtube.com/channel/${songInfo.author.id}`,
+    thumbnail: songThumbnails[songThumbnails.length - 1].url,
+    title: songInfo.title,
+    video_url: songInfo.video_url,
+    length: songInfo.length_seconds,
+    addedBy: message.author.toString()
+  };
+
+  // add song to queue
+  server.get(message.guild.id).songs.push(song);
+
+  queueMessage.edit({
+    embed: {
+      color: 3066993,
+        description: `${message2.author.toString()} added **[${songInfo.title}](${songInfo.video_url})** to the queue`,
+    }
+  });
+
+  // check if song is currently playing
   if (server.get(message.guild.id).playing) {
-    return message.channel.send("Song added to queue");
+    return;
   }
 
   // play song
@@ -41,14 +64,43 @@ play = async message => {
 
 async function _playSong(message, server) {
   const queue = server.get(message.guild.id);
+  const song = queue.songs[0];
+
+  message.channel.send({
+    embed: {
+      color: 3447003,
+      thumbnail: {
+        url: song.thumbnail
+      },
+      fields: [
+        {
+          name: "Title",
+          value: `**[${song.title}](${song.video_url})**`
+        },
+        {
+          name: "Uploader",
+          value: `**[${song.uploader}](${song.uploader_url})**`,
+          inline: true
+        },
+        {
+          name: "Added by",
+          value: song.addedBy,
+          inline: true
+        },
+        {
+          name: "Length",
+          value: `${toTimeString(song.length)}`,
+          inline: true
+        }
+      ]
+    }
+  });
 
   // set queue to playing
   queue.playing = true;
 
   // stream song
-  const dispatcher = await queue.connection.playOpusStream(
-    await ytdl(queue.songs[0])
-  );
+  const dispatcher = await queue.connection.playOpusStream(await ytdl(song.video_url));
 
   // the song has finished
   dispatcher.on("end", () => {
@@ -56,7 +108,7 @@ async function _playSong(message, server) {
     queue.songs.shift();
 
     // play next song
-    if (queue.songs.length > 0) {
+    if (queue.songs.length > 0 && queue.playing === true) {
       return _playSong(message, server);
     }
 
@@ -71,6 +123,10 @@ async function _playSong(message, server) {
   dispatcher.on("error", e => {
     console.log(e);
   });
+}
+
+function toTimeString(seconds) {
+  return new Date(seconds * 1000).toUTCString().match(/(\d\d:\d\d:\d\d)/)[0];
 }
 
 module.exports = play;
