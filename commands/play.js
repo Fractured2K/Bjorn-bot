@@ -1,5 +1,6 @@
 const ytdl = require("ytdl-core-discord");
 const parseMessage = require("../utils/parseMessage");
+const formatSong = require("../helpers/formatSong");
 
 play = async message => {
   const server = message.client.queue;
@@ -17,7 +18,7 @@ play = async message => {
   // join voice channel and establish a connection
   const connection = await message.member.voiceChannel.join();
 
-  // check to see if server connection exists
+  // check server existence
   if (!server.get(message.guild.id)) {
     server.set(message.guild.id, {
       textChannel: message.channel,
@@ -28,28 +29,24 @@ play = async message => {
     });
   }
 
-  const queueMessage = await message.channel.send(":arrows_counterclockwise: Preparing video")
+  // send video preparation confirmation
+  const queueMessage = await message.channel.send(
+    ":arrows_counterclockwise: Preparing song"
+  );
 
-  const songInfo = await ytdl.getInfo(url);
-  const songThumbnails = songInfo.player_response.videoDetails.thumbnail.thumbnails;
+  // query and format video meta data
+  const song = await formatSong(url, message);
 
-  const song = {
-	uploader: songInfo.author.name,
-	uploader_url:`https://www.youtube.com/channel/${songInfo.author.id}`,
-    thumbnail: songThumbnails[songThumbnails.length - 1].url,
-    title: songInfo.title,
-    video_url: songInfo.video_url,
-    length: songInfo.length_seconds,
-    addedBy: message.author.toString()
-  };
-
-  // add song to queue
+  // add song to server queue
   server.get(message.guild.id).songs.push(song);
 
+  // replace queueMessage with song added to queue confirmation message
   queueMessage.edit({
     embed: {
       color: 3066993,
-        description: `${message2.author.toString()} added **[${songInfo.title}](${songInfo.video_url})** to the queue`,
+      description: `${message.author.toString()} added **[${song.title}](${
+        song.video_url
+      })** to the queue`
     }
   });
 
@@ -89,7 +86,7 @@ async function _playSong(message, server) {
         },
         {
           name: "Length",
-          value: `${toTimeString(song.length)}`,
+          value: `${_toTimeString(song.length)}`,
           inline: true
         }
       ]
@@ -100,7 +97,12 @@ async function _playSong(message, server) {
   queue.playing = true;
 
   // stream song
-  const dispatcher = await queue.connection.playOpusStream(await ytdl(song.video_url));
+  const dispatcher = await queue.connection.playOpusStream(
+    await ytdl(song.video_url)
+  );
+
+  // set clients status to current song playing
+  message.client.user.setActivity(`${song.title}`);
 
   // the song has finished
   dispatcher.on("end", () => {
@@ -117,6 +119,9 @@ async function _playSong(message, server) {
 
     // leave voice channel
     message.member.voiceChannel.leave();
+
+    // reset clients status to env status
+    message.client.user.setActivity(process.env.BOT_STATUS);
   });
 
   // catch any errors that may arise
@@ -125,7 +130,7 @@ async function _playSong(message, server) {
   });
 }
 
-function toTimeString(seconds) {
+function _toTimeString(seconds) {
   return new Date(seconds * 1000).toUTCString().match(/(\d\d:\d\d:\d\d)/)[0];
 }
 
