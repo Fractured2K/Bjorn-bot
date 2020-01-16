@@ -9,7 +9,7 @@ stop = message => {
     return message.channel.send("No songs currently playing.");
   }
 
-  server.playing = false
+  server.playing = false;
 
   // end song
   server.connection.dispatcher.end();
@@ -22,11 +22,10 @@ stop = message => {
 
   return message.channel.send({
     embed: {
-      color: 3447003,
-      description: `:stop_button: Song stopped and queue cleared`
+      color: 15158332,
+      description: `:stop_button: Song stopped and cleared queue`
     }
   });
-
 };
 
 module.exports = stop;
