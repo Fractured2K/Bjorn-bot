@@ -2,17 +2,19 @@ const eightBall = require("../commands/8ball");
 const help = require("../commands/help");
 const meme = require("../commands/meme");
 const ping = require("../commands/ping");
-const play = require('../commands/play');
+const play = require("../commands/play");
+const stop = require("../commands/stop");
 
-executeCommand = (message) => {
+executeCommand = message => {
   if (message.content.charAt(0) === "!") {
     // available commands
     const commands = {
       "8ball": () => eightBall(message),
       meme: () => meme(message),
       ping: () => ping(message),
-	  help: () => help(message),
-	  play: () => play(message)
+      help: () => help(message),
+      play: () => play(message),
+      stop: () => stop(message)
     };
 
     const command = message.content
