@@ -7,12 +7,12 @@ play = async message => {
   const voiceChannel = message.member.voiceChannel;
   const url = parseMessage(message);
 
-  if (!voiceChannel) {
-    return message.channel.send("Please join a voice channel first");
-  }
-
   if (!url) {
     return message.channel.send("Please provide a url or text to play a song");
+  }
+
+  if (!voiceChannel) {
+    return message.channel.send("Please join a voice channel first");
   }
 
   // join voice channel and establish a connection

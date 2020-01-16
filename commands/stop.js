@@ -23,7 +23,7 @@ stop = message => {
   return message.channel.send({
     embed: {
       color: 15158332,
-      description: `:stop_button: Song stopped and cleared queue`
+      description: `:stop_button: ${message.author.toString()} Stopped the player and cleared queue`
     }
   });
 };
