@@ -19,7 +19,7 @@ help = message => {
           value: "**Skip song currently playing**"
         },
         {
-          name: "```!stop - COMING SOON```",
+          name: "```!stop```",
           value: "**Stop song currently playing**"
         },
         {
