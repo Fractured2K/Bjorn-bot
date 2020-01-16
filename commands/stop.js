@@ -9,21 +9,24 @@ stop = message => {
     return message.channel.send("No songs currently playing.");
   }
 
+  server.playing = false
+
   // end song
   server.connection.dispatcher.end();
-
-  // remove server
-  message.client.queue.delete(message.guild.id);
 
   // leave voice channel
   message.member.voiceChannel.leave();
 
+  // remove server
+  message.client.queue.delete(message.guild.id);
+
   return message.channel.send({
     embed: {
       color: 3447003,
-      title: `Song stopped and queue cleared`
+      description: `:stop_button: Song stopped and queue cleared`
     }
   });
+
 };
 
 module.exports = stop;
