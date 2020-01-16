@@ -31,6 +31,14 @@ help = message => {
           value: "**View current songs in queue**"
         },
         {
+          name: "```!nowplaying - COMING SOON```",
+          value: "**Returns current song playing**"
+        },
+        {
+          name: "```!shuffle - COMING SOON```",
+          value: "**Shuffles the current songs in queue**"
+        },
+        {
           name: "```!8ball```",
           value: "**Ask the eight ball a question and get a response!**"
         },
