@@ -10,9 +10,9 @@ Work in progress
 
 #### Quick Links
 
-- [Commands](#commands-🖥️)
-- [Configuring a Development Environment](#dev-💻)
-- [Deploying Bjorn](#deploying-bjorn-🚀)
+- [Commands](#commands)
+- [Configuring a Development Environment](#dev)
+- [Deploying Bjorn](#deploying-bjorn)
 
 # Commands 🖥️
 
