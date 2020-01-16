@@ -1,6 +1,6 @@
 # **Bjorn Bot** 🤖
 
-[![Open Source Love](https://badges.frapsoft.com/os/v1/open-source.png?v=103)](https://github.com/ellerbrock/open-source-badges/)
+[![Open Source Love](https://badges.frapsoft.com/os/v1/open-source.png?v=103)](https://github.com/fractured2k/bjorn-bot/#contributing-)
 [![MIT Licence](https://badges.frapsoft.com/os/mit/mit.png?v=103)](https://opensource.org/licenses/mit-license.php) [![star this repo](https://githubbadges.com/star.svg?user=fractured2k&repo=bjorn-bot&style=default)](https://github.com/fractured2k/bjorn-bot)
 [![fork this repo](https://githubbadges.com/fork.svg?user=fractured2k&repo=bjorn-bot&style=default)](https://github.com/fractured2k/bjorn-bot/fork)
 
