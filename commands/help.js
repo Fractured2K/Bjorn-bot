@@ -15,7 +15,11 @@ help = message => {
           value: "**Plays a song**"
         },
         {
-          name: "```!skip  - COMING SOON```",
+          name: "```!pause```",
+          value: "**Pause/Resume current song**"
+        },
+        {
+          name: "```!skip```",
           value: "**Skip song currently playing**"
         },
         {
@@ -31,11 +35,11 @@ help = message => {
           value: "**Ask the eight ball a question and get a response!**"
         },
         {
-          name: "```!Meme```",
+          name: "```!meme```",
           value: "**Scrait up steals a meme**"
         },
         {
-          name: "```!Ping```",
+          name: "```!ping```",
           value: "**Replies with pong**"
         }
       ]
