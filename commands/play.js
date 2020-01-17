@@ -1,15 +1,9 @@
 const ytdl = require("ytdl-core-discord");
-const parseMessage = require("../utils/parseMessage");
 const formatSong = require("../helpers/formatSong");
-
+const generateUrl = require("../helpers/generateUrl");
 play = async message => {
   const server = message.client.queue;
   const voiceChannel = message.member.voiceChannel;
-  const url = parseMessage(message);
-
-  if (!url) {
-    return message.channel.send("Please provide a url or text to play a song");
-  }
 
   if (!voiceChannel) {
     return message.channel.send("Please join a voice channel first");
@@ -33,6 +27,9 @@ play = async message => {
   const queueMessage = await message.channel.send(
     ":arrows_counterclockwise: Preparing song"
   );
+
+  // prepare video url
+  const url = await generateUrl(message);
 
   // query and format video meta data
   const song = await formatSong(url, message);
