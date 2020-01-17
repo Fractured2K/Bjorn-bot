@@ -6,6 +6,7 @@ const play = require("../commands/play");
 const pause = require("../commands/pause");
 const skip = require("../commands/skip");
 const stop = require("../commands/stop");
+const nowplaying = require("../commands/nowplaying");
 
 executeCommand = message => {
   if (message.content.charAt(0) === "!") {
@@ -18,7 +19,8 @@ executeCommand = message => {
       play: () => play(message),
       pause: () => pause(message),
       skip: () => skip(message),
-      stop: () => stop(message)
+      stop: () => stop(message),
+      nowplaying: () => nowplaying(message)
     };
 
     const command = message.content
