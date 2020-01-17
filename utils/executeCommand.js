@@ -1,42 +1,34 @@
-const eightBall = require("../commands/8ball");
-const help = require("../commands/help");
-const meme = require("../commands/meme");
-const ping = require("../commands/ping");
-const play = require("../commands/play");
-const pause = require("../commands/pause");
-const skip = require("../commands/skip");
-const stop = require("../commands/stop");
-const nowplaying = require("../commands/nowplaying");
+const fs = require("fs").promises;
 
-executeCommand = message => {
-  if (message.content.charAt(0) === "!") {
-    // available commands
-    const commands = {
-      "8ball": () => eightBall(message),
-      meme: () => meme(message),
-      ping: () => ping(message),
-      help: () => help(message),
-      play: () => play(message),
-      pause: () => pause(message),
-      skip: () => skip(message),
-      stop: () => stop(message),
-      nowplaying: () => nowplaying(message)
-    };
-
-    const command = message.content
-      .toLowerCase()
-      .split("!")
-      .join("")
-      .split(" ");
-
-    // check if command exists
-    if (commands[command[0]]) {
-      // run command
-      return commands[command[0]]();
-    }
-
-    return message.channel.send("Sorry, but that command doesn't exist");
+executeCommand = async message => {
+  // load commands
+  if (!message.client.commands.size > 0) {
+    await _loadCommands(message);
   }
+
+  // parse command form message
+  const commandArg = message.content
+    .toLowerCase()
+    .slice(1)
+    .split(" ")[0];
+
+  const command = message.client.commands.get(commandArg);
+
+  if (command) {
+    return command(message);
+  }
+
+  return message.channel.send("Sorry, but that command doesn't exist");
 };
+
+async function _loadCommands(message) {
+  // list of possible commands
+  const commands = await fs.readdir(__dirname + "/../commands");
+  // set list of possible commands
+  for (const file of commands) {
+    const command = require(`../commands/${file}`);
+    message.client.commands.set(command.name, command);
+  }
+}
 
 module.exports = executeCommand;
