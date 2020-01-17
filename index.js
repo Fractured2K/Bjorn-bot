@@ -13,11 +13,14 @@ client.on("ready", () => {
 
 client.on("message", message => {
   try {
+    // ignore bot messages
     if (message.author.bot) return;
+    // ignore messages without command prefix
     if (!message.content.startsWith(process.env.COMMAND_PREFIX)) return;
 
     executeCommand(message);
   } catch (error) {
+    message.channel.send("Sorry, but something went wrong.");
     throw new Error(error);
   }
 });

@@ -2,58 +2,61 @@ const ytdl = require("ytdl-core-discord");
 const formatSong = require("../helpers/formatSong");
 const generateUrl = require("../helpers/generateUrl");
 play = async message => {
-  const server = message.client.queue;
-  const voiceChannel = message.member.voiceChannel;
+  try {
+    const server = message.client.queue;
+    const voiceChannel = message.member.voiceChannel;
 
-  if (!voiceChannel) {
-    return message.channel.send("Please join a voice channel first");
-  }
-
-  // join voice channel and establish a connection
-  const connection = await message.member.voiceChannel.join();
-
-  // check server existence
-  if (!server.get(message.guild.id)) {
-    server.set(message.guild.id, {
-      textChannel: message.channel,
-      voiceChannel,
-      connection,
-      songs: [],
-      playing: false
-    });
-  }
-
-  // send video preparation confirmation
-  const queueMessage = await message.channel.send(
-    ":arrows_counterclockwise: Preparing song"
-  );
-
-  // prepare video url
-  const url = await generateUrl(message);
-
-  // query and format video meta data
-  const song = await formatSong(url, message);
-
-  // add song to server queue
-  server.get(message.guild.id).songs.push(song);
-
-  // replace queueMessage with song added to queue confirmation message
-  queueMessage.edit({
-    embed: {
-      color: 3066993,
-      description: `${message.author.toString()} added **[${song.title}](${
-        song.video_url
-      })** to the queue`
+    if (!voiceChannel) {
+      return message.channel.send("Please join a voice channel first");
     }
-  });
 
-  // check if song is currently playing
-  if (server.get(message.guild.id).playing) {
-    return;
+    // join voice channel and establish a connection
+    const connection = await message.member.voiceChannel.join();
+
+    // check server existence
+    if (!server.get(message.guild.id)) {
+      server.set(message.guild.id, {
+        textChannel: message.channel,
+        voiceChannel,
+        connection,
+        songs: [],
+        playing: false
+      });
+    }
+
+    // send video preparation confirmation
+    const queueMessage = await message.channel.send(
+      ":arrows_counterclockwise: Preparing song"
+    );
+
+    // prepare video url
+    const url = await generateUrl(message);
+    // query and format video meta data
+    const song = await formatSong(url, message);
+
+    // add song to server queue
+    server.get(message.guild.id).songs.push(song);
+
+    // replace queueMessage with song added to queue confirmation message
+    queueMessage.edit({
+      embed: {
+        color: 3066993,
+        description: `${message.author.toString()} added **[${song.title}](${
+          song.video_url
+        })** to the queue`
+      }
+    });
+
+    // check if song is currently playing
+    if (server.get(message.guild.id).playing) {
+      return;
+    }
+
+    // play song
+    _playSong(message, server);
+  } catch (error) {
+    throw new Error(error);
   }
-
-  // play song
-  _playSong(message, server);
 };
 
 async function _playSong(message, server) {

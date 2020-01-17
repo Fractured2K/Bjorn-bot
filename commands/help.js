@@ -39,8 +39,8 @@ help = message => {
           value: "**Shuffles the current songs in queue**"
         },
         {
-          name: "```!8ball```",
-          value: "**Ask the eight ball a question and get a response!**"
+          name: "```!ball```",
+          value: "**Ask the magic eight ball a question and get a response!**"
         },
         {
           name: "```!meme```",
