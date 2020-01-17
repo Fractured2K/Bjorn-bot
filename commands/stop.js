@@ -5,7 +5,7 @@ stop = message => {
 
   const server = message.client.queue.get(message.guild.id);
 
-  if (!server) {
+  if (!server || !server.playing) {
     return message.channel.send("No songs currently playing.");
   }
 
