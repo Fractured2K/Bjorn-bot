@@ -11,7 +11,7 @@ help = message => {
       description: "A list of some cool shit Bjorn can do",
       fields: [
         {
-          name: "```!play {URL}```",
+          name: "```!play {URL} or {TEXT}```",
           value: "**Plays a song**"
         },
         {
