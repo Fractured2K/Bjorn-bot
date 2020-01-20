@@ -4,8 +4,9 @@
 	"description": "A feature rich discord bot",
 	"main": "index.js",
 	"scripts": {
-		"start": "node ./src/inndex.ts",
+		"start": "node ./build/index.js",
 		"dev": "nodemon",
+		"build": "tsc",
 		"test": "echo \"Error: no test specified\" && exit 1"
 	},
 	"repository": {
