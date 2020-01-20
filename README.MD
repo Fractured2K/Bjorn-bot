@@ -6,7 +6,7 @@
 
 # Getting started 👋
 
-What is Bjorn Bot? Bjorn Bot started off as an excuse to learn and work with the [Discord.js Library](https://discord.js.org/#/), a robust node module that allows you to easily interact with the [Discord API](https://discordapp.com/developers/docs/intro). It quickly after became an open source, feature rich (Not quite, but working on that), discord bot that anyone could download, deploy and or contribute to.
+Bjorn Bot is an open source, simple to use, robust music bot built with [Discord.js](https://discord.js.org/#/). A powerful [node.js](https://nodejs.org/en/) module that allows you to easilly interact with the [Discord API](https://discordapp.com/developers/docs/intro).
 
 #### Quick Links
 
