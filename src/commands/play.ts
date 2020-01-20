@@ -1,9 +1,12 @@
-const ytdl = require("ytdl-core-discord");
-const formatSong = require("../helpers/formatSong");
-const generateUrl = require("../helpers/generateUrl");
-play = async message => {
+import ytdl from "ytdl-core-discord";
+import { formatSong } from "../helpers/formatSong";
+import { generateUrl } from "../helpers/generateUrl";
+import { Message } from "discord.js";
+
+// @ts-ignore
+export default async function play(message: Message) {
   try {
-    const server = message.client.queue;
+    const server = (message.client as any).queue;
     const voiceChannel = message.member.voiceChannel;
 
     if (!voiceChannel) {
@@ -38,7 +41,7 @@ play = async message => {
     server.get(message.guild.id).songs.push(song);
 
     // replace queueMessage with song added to queue confirmation message
-    queueMessage.edit({
+    (queueMessage as Message).edit({
       embed: {
         color: 3066993,
         description: `${message.author.toString()} added **[${song.title}](${
@@ -57,11 +60,11 @@ play = async message => {
   } catch (error) {
     throw new Error(error);
   }
-};
+}
 
-async function _playSong(message, server) {
+async function _playSong(message: Message, server: Map<string, Object>) {
   const queue = server.get(message.guild.id);
-  const song = queue.songs[0];
+  const song = (queue as any).songs[0];
 
   message.channel.send({
     embed: {
@@ -94,10 +97,10 @@ async function _playSong(message, server) {
   });
 
   // set queue to playing
-  queue.playing = true;
+  (queue as any).playing = true;
 
   // stream song
-  const dispatcher = await queue.connection.playOpusStream(
+  const dispatcher = await (queue as any).connection.playOpusStream(
     await ytdl(song.video_url)
   );
 
@@ -105,12 +108,13 @@ async function _playSong(message, server) {
   message.client.user.setActivity(`${song.title}`);
 
   // the song has finished
+  // @ts-ignore
   dispatcher.on("end", () => {
     // remove song from queue
-    queue.songs.shift();
+    (queue as any).songs.shift();
 
     // play next song
-    if (queue.songs.length > 0 && queue.playing === true) {
+    if ((queue as any).songs.length > 0 && (queue as any).playing === true) {
       return _playSong(message, server);
     }
 
@@ -121,17 +125,16 @@ async function _playSong(message, server) {
     message.member.voiceChannel.leave();
 
     // reset clients status to env status
-    message.client.user.setActivity(process.env.BOT_STATUS);
+    message.client.user.setActivity(process.env.BOT_STATUS as any);
   });
 
   // catch any errors that may arise
-  dispatcher.on("error", e => {
-    console.log(e);
+  dispatcher.on("error", (error: Error) => {
+    console.log(error);
   });
 }
 
-function _toTimeString(seconds) {
+function _toTimeString(seconds: Number) {
+  // @ts-ignore
   return new Date(seconds * 1000).toUTCString().match(/(\d\d:\d\d:\d\d)/)[0];
 }
-
-module.exports = play;

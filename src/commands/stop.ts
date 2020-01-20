@@ -1,9 +1,11 @@
-stop = message => {
+import { Message } from "discord.js";
+
+export default function stop(message: Message) {
   if (!message.member.voiceChannel) {
     return message.channel.send("Please join a voice channel first");
   }
 
-  const server = message.client.queue.get(message.guild.id);
+  const server = (message.client as any).queue.get(message.guild.id);
 
   if (!server || !server.playing) {
     return message.channel.send("No songs currently playing.");
@@ -18,7 +20,7 @@ stop = message => {
   message.member.voiceChannel.leave();
 
   // remove server
-  message.client.queue.delete(message.guild.id);
+  (message.client as any).queue.delete(message.guild.id);
 
   return message.channel.send({
     embed: {
@@ -26,6 +28,4 @@ stop = message => {
       description: `:stop_button: ${message.author.toString()} Stopped the player and cleared queue`
     }
   });
-};
-
-module.exports = stop;
+}

@@ -1,5 +1,7 @@
-nowplaying = message => {
-  const server = message.client.queue.get(message.guild.id);
+import { Message } from "discord.js";
+
+export default function nowplaying(message: Message) {
+  const server = (message.client as any).queue.get(message.guild.id);
 
   if (!server || !server.playing) {
     return message.channel.send("No songs currently playing.");
@@ -15,6 +17,4 @@ nowplaying = message => {
       })** is currently playing`
     }
   });
-};
-
-module.exports = nowplaying;
+}

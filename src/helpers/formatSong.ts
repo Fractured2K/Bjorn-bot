@@ -1,4 +1,5 @@
-const ytdl = require("ytdl-core-discord");
+import ytdl from "ytdl-core-discord";
+import { Message } from "discord.js";
 
 /*@
  * Accepts a youtube url and returns a formatted song object
@@ -7,7 +8,7 @@ const ytdl = require("ytdl-core-discord");
  * @return {Object}
  */
 
-formatSong = async (url, message) => {
+export const formatSong = async (url: string, message: Message) => {
   // query youtube video meta data
   const songInfo = await ytdl.getInfo(url);
 
@@ -25,5 +26,3 @@ formatSong = async (url, message) => {
     addedBy: message.author.toString()
   };
 };
-
-module.exports = formatSong;

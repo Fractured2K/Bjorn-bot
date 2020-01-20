@@ -1,9 +1,11 @@
-pause = message => {
+import { Message } from "discord.js";
+
+export default function pause(message: Message) {
   if (!message.member.voiceChannel) {
     return message.channel.send("Please join a voice channel first");
   }
 
-  const server = message.client.queue.get(message.guild.id);
+  const server = (message.client as any).queue.get(message.guild.id);
 
   if (!server) {
     return message.channel.send("No songs currently playing.");
@@ -27,6 +29,4 @@ pause = message => {
       }) has been ${server.playing ? "**resumed**" : "**paused**"}`
     }
   });
-};
-
-module.exports = pause;
+}

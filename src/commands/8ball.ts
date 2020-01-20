@@ -1,11 +1,12 @@
-const reponses = require("../helpers/8ballReponses");
-const parseMessage = require("../utils/parseMessage");
+import reponses from "../helpers/8ballReponses";
+import { parseMessage } from "../utils/parseMessage";
+import { Message } from "discord.js";
 
 /*
  * Returns random 8ball response
  */
 
-ball = message => {
+export const eightBall = (message: Message) => {
   // generate random number between 1-20
   const guess = Math.floor(Math.random() * Math.floor(20) + 1);
 
@@ -26,5 +27,3 @@ ball = message => {
     }
   });
 };
-
-module.exports = ball;

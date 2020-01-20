@@ -1,8 +1,9 @@
 const fs = require("fs").promises;
+import { Message } from "discord.js";
 
-executeCommand = async message => {
+export const executeCommand = async (message: Message) => {
   // load commands
-  if (!message.client.commands.size > 0) {
+  if ((message.client as any).commands.size == 0) {
     await _loadCommands(message);
   }
 
@@ -12,23 +13,27 @@ executeCommand = async message => {
     .slice(1)
     .split(" ")[0];
 
-  const command = message.client.commands.get(commandArg);
+  const command = (message.client as any).commands.get(commandArg);
 
   if (command) {
-    return command(message);
+    return command[Object.keys(command)[0]](message);
   }
 
   return message.channel.send("Sorry, but that command doesn't exist");
 };
 
-async function _loadCommands(message) {
+async function _loadCommands(message: Message) {
   // list of possible commands
   const commands = await fs.readdir(__dirname + "/../commands");
+
   // set list of possible commands
   for (const file of commands) {
+    const fileName = file
+      .split(".")
+      .slice(0, -1)
+      .join(".");
+
     const command = require(`../commands/${file}`);
-    message.client.commands.set(command.name, command);
+    (message.client as any).commands.set(fileName, command);
   }
 }
-
-module.exports = executeCommand;

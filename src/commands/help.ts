@@ -1,8 +1,10 @@
+import { Message } from "discord.js";
+
 /*
  * Returns embeded message of possible commands
  */
 
-help = message => {
+export default function(message: Message) {
   // return reponse from eight ball reponses array
   return message.channel.send({
     embed: {
@@ -39,7 +41,7 @@ help = message => {
           value: "**Shuffles the current songs in queue**"
         },
         {
-          name: "```!ball```",
+          name: "```!8ball```",
           value: "**Ask the magic eight ball a question and get a response!**"
         },
         {
@@ -53,6 +55,4 @@ help = message => {
       ]
     }
   });
-};
-
-module.exports = help;
+}

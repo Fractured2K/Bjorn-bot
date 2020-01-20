@@ -1,9 +1,12 @@
-skip = message => {
+import { Message } from "discord.js";
+
+// @ts-ignore
+export default function skip(message: Message) {
   if (!message.member.voiceChannel) {
     return message.channel.send("Please join a voice channel first");
   }
 
-  const server = message.client.queue.get(message.guild.id);
+  const server = (message.client as any).queue.get(message.guild.id);
 
   if (!server) {
     return message.channel.send("No songs currently playing.");
@@ -18,6 +21,4 @@ skip = message => {
 
   // end song
   server.connection.dispatcher.end();
-};
-
-module.exports = skip;
+}

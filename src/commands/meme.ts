@@ -1,3 +1,5 @@
+import { Message } from "discord.js";
+
 const { Attachment } = require("discord.js");
 const axios = require("axios");
 
@@ -5,7 +7,7 @@ const axios = require("axios");
  * Returns random meme from meme api
  */
 
-meme = async message => {
+export default async function meme(message: Message) {
   // send message confirming a meme is being sent
   message.channel.send({
     embed: {
@@ -22,6 +24,4 @@ meme = async message => {
 
   // return message with attached meme (image)
   return message.channel.send(attachment);
-};
-
-module.exports = meme;
+}

@@ -1,5 +1,6 @@
-const parseMessage = require("../utils/parseMessage");
-const axios = require("axios");
+import { parseMessage } from "../utils/parseMessage";
+import axios from "axios";
+import { Message } from "discord.js";
 
 /*@
  * Validates passed in URLs, if text is passed, parses text into youtube url
@@ -7,7 +8,7 @@ const axios = require("axios");
  * @return {String}         Returns youtube url
  */
 
-generateUrl = async message => {
+export const generateUrl = async (message: Message) => {
   const supportedUrls = ["http://www.youtube.com/watch?", "http://youtu.be/"];
   const urlOrText = parseMessage(message);
 
@@ -21,9 +22,7 @@ generateUrl = async message => {
   }
 };
 
-function _formatUrl(text) {
+function _formatUrl(text: string) {
   const formattedText = text.split(" ").join("%20");
   return `https://www.googleapis.com/youtube/v3/search?part=snippet&q=${formattedText}&maxResults=1&key=${process.env.YOUTUBE_KEY}`;
 }
-
-module.exports = generateUrl;
