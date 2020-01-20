@@ -31,7 +31,7 @@ Music commands
 - 🛑 **stop** - Stops song currently playing and clears queue
 - **more to come soon 😄**
 
-      	![](docs/images/commands-gif.gif)
+	![](docs/images/commands-gif.gif)
 
 # Dev 💻
 
