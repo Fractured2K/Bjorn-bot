@@ -26,7 +26,7 @@
 	"homepage": "https://github.com/Fractured2K/Bjorn-the-bot#readme",
 	"dependencies": {
 		"@types/node": "^13.1.8",
-		"axios": "^0.19.0",
+		"axios": "^0.21.1",
 		"discord.js": "^11.5.1",
 		"dotenv": "^8.2.0",
 		"ffmpeg-binaries": "^3.2.2-3",
